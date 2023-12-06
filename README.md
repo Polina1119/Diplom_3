@@ -29,4 +29,4 @@
 - после оформления заказа его номер появляется в разделе В работе.
 
 ## Отчет Allure
-![img.png](img.png)
+![image](https://github.com/Polina1119/Diplom_3/assets/144913796/f28f127b-7ece-4274-b3d9-c85132f260a2)
