@@ -2,13 +2,14 @@ import allure
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import data
 
 
 class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.url = 'https://stellarburgers.nomoreparties.site/'
+        self.url = data.Urls.url
 
     @allure.step('Открываем страницу StellarBurgers')
     def go_to_site(self):
@@ -20,7 +21,7 @@ class BasePage:
     def find_elements(self, locator, time=10):
         return WebDriverWait(self.driver, time).until(EC.presence_of_all_elements_located(locator), message=f'Not find {locator}')
 
-    def execute_script(self, locator):
+    def scroll_to(self, locator):
         return self.driver.execute_script("arguments[0].scrollIntoView();", locator)
 
     def current_url(self):

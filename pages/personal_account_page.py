@@ -1,7 +1,6 @@
 from pages.base_page import BasePage
 from locators.personal_account_locators import PersonalAccountPageLocators as LK
 import allure
-
 import data
 
 
@@ -17,11 +16,11 @@ class PersonalAccountPage(BasePage):
 
     @allure.step('Ввести email')
     def input_email(self):
-        self.find_element(LK.EMAIL).send_keys(data.email)
+        self.find_element(LK.EMAIL).send_keys(data.User.email)
 
     @allure.step('Ввести пароль')
     def input_password(self):
-        self.find_element(LK.EMAIL).send_keys(data.password)
+        self.find_element(LK.PASSWORD).send_keys(data.User.password)
 
     @allure.step('Кликнуть на кнопку "История заказов"')
     def click_button_history_orders(self):

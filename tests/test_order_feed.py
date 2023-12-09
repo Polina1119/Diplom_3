@@ -22,7 +22,7 @@ class TestOrderFeedPage:
         main_page.check_counter_ingredients()
         main_page.drag_and_drop_on_element(locator_1=Main.FLUORESCENT_BUN, locator_2=Main.DRAG_HERE)
         main_page.click_on_place_order()
-        main_page.close_window()
+        main_page.close_window_with_details()
         main_page.click_on_lk()
         lk = LK(driver)
         lk.click_button_history_orders()
@@ -30,20 +30,20 @@ class TestOrderFeedPage:
         lk.click_button_history_orders()
         order_feed_page = OrderFeedPage(driver)
 
-        assert order_feed_page.check_order_number(order_number)
+        assert order_feed_page.get_order_number(order_number)
 
     @allure.title('При создании нового заказа счётчик "Выполнено за всё время" увеличивается')
     def test_after_create_order_counter_orders_of_all_time_increases(self, driver, login):
         main_page = MainPage(driver)
         main_page.click_on_order_feed()
         order_feed_page = OrderFeedPage(driver)
-        counter_1 = order_feed_page.check_counter_orders_of_all_time()
+        counter_1 = order_feed_page.get_counter_orders_of_all_time()
         main_page.click_on_constructor()
         main_page.drag_and_drop_on_element(locator_1=Main.FLUORESCENT_BUN, locator_2=Main.DRAG_HERE)
         main_page.click_on_place_order()
-        main_page.close_window()
+        main_page.close_window_with_details()
         main_page.click_on_order_feed()
-        counter_2 = order_feed_page.check_counter_orders_of_all_time()
+        counter_2 = order_feed_page.get_counter_orders_of_all_time()
 
         assert int(counter_1) < int(counter_2)
 
@@ -52,24 +52,25 @@ class TestOrderFeedPage:
         main_page = MainPage(driver)
         main_page.click_on_order_feed()
         order_feed_page = OrderFeedPage(driver)
-        counter_1 = order_feed_page.check_counter_orders_for_today()
+        counter_1 = order_feed_page.get_counter_orders_for_today()
         main_page.click_on_constructor()
         main_page.drag_and_drop_on_element(locator_1=Main.FLUORESCENT_BUN, locator_2=Main.DRAG_HERE)
         main_page.click_on_place_order()
-        main_page.close_window()
+        main_page.close_window_with_details()
         main_page.click_on_order_feed()
-        counter_2 = order_feed_page.check_counter_orders_for_today()
+        counter_2 = order_feed_page.get_counter_orders_for_today()
 
         assert int(counter_1) < int(counter_2)
 
     @allure.title('После оформления заказа его номер появляется в разделе "В работе"')
     def test_after_create_order_number_order_to_in_work(self, driver, login):
         main_page = MainPage(driver)
+        order = OrderFeedPage(driver)
         main_page.check_counter_ingredients()
         main_page.drag_and_drop_on_element(locator_1=Main.FLUORESCENT_BUN, locator_2=Main.DRAG_HERE)
         main_page.click_on_place_order()
-        order_number = main_page.check_order_number()
-        main_page.close_window()
+        order_number = order.get_number_order()
+        main_page.close_window_with_details()
         main_page.click_on_order_feed()
 
         assert str(order_number) in main_page.find_element(Order.IN_WORK).text

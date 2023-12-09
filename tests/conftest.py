@@ -19,7 +19,7 @@ def driver(request):
     if request.param == 'firefox':
         driver = webdriver.Firefox(service=Firefox(GeckoDriverManager().install()))
     driver.maximize_window()
-    driver.get(data.url)
+    driver.get(data.Urls.url)
     yield driver
     driver.quit()
 
@@ -27,14 +27,14 @@ def driver(request):
 @pytest.fixture
 def register_user():
     payload = {
-        "email": data.email,
-        "password": data.password,
-        "name": data.name
+        "email": data.User.email,
+        "password": data.User.password,
+        "name": data.User.name
     }
-    response = requests.post(f'{data.url}api/auth/register', data=payload)
+    response = requests.post(f'{data.Urls.url}api/auth/register', data=payload)
     yield payload
     token = response.json()['accessToken']
-    requests.delete(f'{data.url}api/auth/user', headers={"Authorization": token})
+    requests.delete(f'{data.Urls.url}api/auth/user', headers={"Authorization": token})
 
 
 @pytest.fixture

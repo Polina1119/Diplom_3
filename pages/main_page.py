@@ -19,10 +19,10 @@ class MainPage(BasePage):
     @allure.step('Скролл до ингредиента')
     def scroll(self):
         element = self.find_element(Main.FLUORESCENT_BUN)
-        return self.execute_script(element)
+        return self.scroll_to(element)
 
-    @allure.step('Нажимаем на крестик')
-    def close_window(self):
+    @allure.step('Закрываем окно с деталями')
+    def close_window_with_details(self):
         return self.find_element(Main.CLOSE).click()
 
     @allure.step('Нажимаем на Личный кабинет')
@@ -40,10 +40,3 @@ class MainPage(BasePage):
     @allure.step('Перемещаем ингредиент в заказ')
     def move_ingredient_in_order(self, locator_1, locator_2):
         self.drag_and_drop_on_element(locator_1, locator_2)
-
-    @allure.step('Проверяем номер заказа')
-    def check_order_number(self):
-        return self.find_element(Main.ORDER_NUMBER).text
-
-
-

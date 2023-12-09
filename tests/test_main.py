@@ -33,7 +33,7 @@ class TestMain:
         main_page = MainPage(driver)
         main_page.scroll()
         main_page.click_on_ingredient()
-        main_page.close_window()
+        main_page.close_window_with_details()
 
         assert base_page.find_element(Main.COLLECT_BURGER).text == 'Соберите бургер'
 
